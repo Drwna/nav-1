@@ -5,7 +5,9 @@ const xObject = JSON.parse(x);
 window.hashMap = xObject || [
     {logo: 'G', url: 'https://github.com'},
     {logo: 'B', url: 'https://bilibili.com'},
-    {logo: 'X', url: 'https://xiedaimala.com'}
+    {logo: 'X', url: 'https://xiedaimala.com'},
+    {logo: 'M', url: 'https://developer.mozilla.org/zh-CN/'},
+    {logo: 'F', url: 'https://www.freecodecamp.org/'}
 ]
 const simplifyUrl = (url) => {
    return url.replace('https://', '')
@@ -15,8 +17,8 @@ const simplifyUrl = (url) => {
 }
 
 const favicon = (url) => {
-    url = url.replace(/\b\/.*/, '');
-    return url + '/favicon.ico';
+    // API http://blog.cccyun.cn/post-388.html
+    return 'http://favicon.cccyun.cc/' + url.replace(/\b\/.*/, '');
 }
 
 const render = () => {
