@@ -116,12 +116,13 @@ body {
     margin-top: 4px;
 }
 
-.siteList .last{
-    display: none;
-}
-
-.siteList:hover .last {
-    display: block;
+@media (min-width: 500px) {
+    .siteList .last{
+        visibility: hidden;
+    }
+    .globalMain:hover .last {
+        visibility: visible;
+    }
 }
 
 .siteList .addButton{
