@@ -2,18 +2,32 @@ const $siteList = $('.siteList');
 const $lastLi = $siteList.find('li.last');
 const x = localStorage.getItem('x');
 const xObject = JSON.parse(x);
-window.hashMap = xObject || [
-    {logo: 'G', url: 'https://github.com'},
-    {logo: 'B', url: 'https://bilibili.com'},
-    {logo: 'X', url: 'https://xiedaimala.com'},
-    {logo: 'M', url: 'https://developer.mozilla.org/zh-CN/'},
-    {logo: 'F', url: 'https://www.freecodecamp.org/'}
+window.hashMap = xObject || [{
+        logo: 'G',
+        url: 'https://github.com'
+    },
+    {
+        logo: 'B',
+        url: 'https://bilibili.com'
+    },
+    {
+        logo: 'X',
+        url: 'https://xiedaimala.com'
+    },
+    {
+        logo: 'M',
+        url: 'https://developer.mozilla.org/zh-CN/'
+    },
+    {
+        logo: 'F',
+        url: 'https://www.freecodecamp.org/'
+    }
 ]
 const simplifyUrl = (url) => {
-   return url.replace('https://', '')
-    .replace('http://', '')
-    .replace('www.', '')
-    .replace(/\/.*/, '');
+    return url.replace('https://', '')
+        .replace('http://', '')
+        .replace('www.', '')
+        .replace(/\/.*/, '');
 }
 
 const favicon = (url) => {
@@ -35,7 +49,9 @@ const render = () => {
                 </div>
             </div>
         </li>`).insertBefore($lastLi);
-        $li.on('click', () => { window.open(node.url) });
+        $li.on('click', () => {
+            window.open(node.url)
+        });
         $li.on('click', '.close', (e) => {
             e.stopPropagation(); // 阻止冒泡
             hashMap.splice(index, 1); // delete
@@ -47,17 +63,16 @@ render();
 
 $('.addButton').on('click', () => {
     let url = window.prompt('enter website');
-    if(url !== ''){
+    if (url !== '') {
         if (url.indexOf('https') !== 0) {
             url = 'https://' + url;
         }
         hashMap.push({
-                logo: simplifyUrl(url)[0],
-                url: url
-            }
-        );
+            logo: simplifyUrl(url)[0],
+            url: url
+        });
         render();
-    }    
+    }
 });
 
 window.onbeforeunload = () => {
@@ -72,10 +87,12 @@ window.onbeforeunload = () => {
 
 $(document).on('keypress', (e) => {
     // const key = e.key
-    const {key} = e;
+    const {
+        key
+    } = e;
     console.log(key);
-    for( let i = 0; i < hashMap.length; i++){
-        if( hashMap[i].logo.toLowerCase() === key ){
+    for (let i = 0; i < hashMap.length; i++) {
+        if (hashMap[i].logo.toLowerCase() === key) {
             window.open(hashMap[i].url);
         }
     }
